@@ -1,0 +1,30 @@
+server:
+  port: 8082
+  
+  
+logging:
+  level:
+    root: INFO
+        
+
+keycloak:
+  ssl-required: external
+  realm: poc
+  resource: poc-web
+  auth-server-url: http://localhost:8180/auth/
+  credentials:
+    secret: 9d2bacb9-2f67-4509-9924-c410b90916f2
+  use-resource-role-mappings: true
+  security-constraints:
+    - authRoles:
+        - ROLE_POC_LOGIN
+      securityCollections:
+        - name: Login
+          patterns: /*
+          methods: GET
+    - authRoles:
+        - ROLE_POC_CONSULTAR_EMPRESA
+      securityCollections:
+        - name: Consultar empresas
+          patterns: /list-empresa/*
+          methods: GET
